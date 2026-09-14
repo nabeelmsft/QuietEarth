@@ -188,20 +188,21 @@ The intended outcome is:
 
 ## Running locally
 
-Create a virtual environment and install the project dependencies:
+QuietEarth requires Python 3.12. Create a virtual environment and install the
+project dependencies:
 
 ```bash
-python -m venv .venv
+python3.12 -m venv .venv
 source .venv/bin/activate
-pip install -e ".[dev]"
+python -m pip install -r requirements.txt
 ```
 
 On Windows PowerShell:
 
 ```powershell
-python -m venv .venv
+py -3.12 -m venv .venv
 .venv\Scripts\Activate.ps1
-pip install -e ".[dev]"
+python -m pip install -r requirements.txt
 ```
 
 Run the tests:
@@ -215,6 +216,17 @@ Start the API:
 ```bash
 uvicorn src.api.main:app --reload
 ```
+
+The initial implementation is intentionally small:
+
+- `src/acoustic_model/signal_generator.py` creates deterministic synthetic
+  tones and harmonics.
+- `src/acoustic_model/spectral_analysis.py` computes one-sided spectra and
+  identifies dominant frequencies.
+- `src/acoustic_model/metrics.py` calculates simulated RMS reduction.
+- `src/api/main.py` exposes health and simulation endpoints.
+
+No user interface or physical-control integration is included.
 
 ## Example simulation request
 
