@@ -1,6 +1,6 @@
 import pytest
 
-from src.acoustic_model.signal_generator import generate_tonal_signal
+from src.acoustic_model.signal_generator import generate_harmonic_signal, generate_tone
 from src.acoustic_model.spectral_analysis import (
     compute_spectrum,
     dominant_frequencies,
@@ -8,7 +8,7 @@ from src.acoustic_model.spectral_analysis import (
 
 
 def test_spectrum_identifies_fundamental_and_harmonics() -> None:
-    _, signal = generate_tonal_signal(100, 3, 1, 2000)
+    signal = generate_harmonic_signal(100, 3, 1, 2000)
 
     peaks = dominant_frequencies(signal, sample_rate_hz=2000, count=3)
 
@@ -16,7 +16,7 @@ def test_spectrum_identifies_fundamental_and_harmonics() -> None:
 
 
 def test_compute_spectrum_returns_expected_amplitude() -> None:
-    _, signal = generate_tonal_signal(100, 1, 1, 2000)
+    signal = generate_tone(100, 1, 2000)
     frequencies, amplitudes = compute_spectrum(signal, sample_rate_hz=2000)
 
     tone_index = int((frequencies == 100).nonzero()[0][0])

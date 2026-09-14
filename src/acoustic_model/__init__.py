@@ -1,12 +1,13 @@
 """Core acoustic simulation utilities for QuietEarth."""
 
 from .metrics import tonal_reduction_db
-from .signal_generator import generate_tonal_signal
+from .signal_generator import generate_harmonic_signal, generate_tone
 from .spectral_analysis import compute_spectrum, dominant_frequencies
 
 __all__ = [
     "compute_spectrum",
     "dominant_frequencies",
-    "generate_tonal_signal",
+    "generate_harmonic_signal",
+    "generate_tone",
     "tonal_reduction_db",
 ]

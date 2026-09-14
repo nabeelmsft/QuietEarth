@@ -5,7 +5,7 @@ from pydantic import BaseModel, Field
 
 from src.acoustic_model import (
     dominant_frequencies,
-    generate_tonal_signal,
+    generate_harmonic_signal,
     tonal_reduction_db,
 )
 
@@ -31,9 +31,9 @@ def health() -> dict[str, bool | str]:
 
 @app.post("/simulate")
 def simulate(request: SimulationRequest) -> dict[str, object]:
-    _, source = generate_tonal_signal(
+    source = generate_harmonic_signal(
         fundamental_hz=request.fundamental_hz,
-        harmonic_count=request.harmonic_count,
+        harmonics=request.harmonic_count,
         duration_seconds=request.duration_seconds,
         sample_rate_hz=request.sample_rate_hz,
     )
