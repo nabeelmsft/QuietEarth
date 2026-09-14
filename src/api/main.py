@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel, Field
 
 from src.acoustic_model import (
-    dominant_frequencies,
+    find_dominant_frequencies,
     generate_harmonic_signal,
     tonal_reduction_db,
 )
@@ -43,10 +43,10 @@ def simulate(request: SimulationRequest) -> dict[str, object]:
         "simulation": True,
         "field_validated": False,
         "control_enabled": request.control_enabled,
-        "dominant_frequencies_hz": dominant_frequencies(
+        "dominant_frequencies_hz": find_dominant_frequencies(
             source,
             request.sample_rate_hz,
-            request.harmonic_count,
+            top_n=request.harmonic_count,
         ),
         "tonal_reduction_db": tonal_reduction_db(source, residual),
     }

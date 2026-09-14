@@ -2,22 +2,35 @@ import pytest
 
 from src.acoustic_model.signal_generator import generate_harmonic_signal, generate_tone
 from src.acoustic_model.spectral_analysis import (
-    compute_spectrum,
-    dominant_frequencies,
+    compute_fft,
+    find_dominant_frequencies,
 )
 
 
-def test_spectrum_identifies_fundamental_and_harmonics() -> None:
-    signal = generate_harmonic_signal(100, 3, 1, 2000)
+def test_find_dominant_frequencies_detects_120_hz_tone() -> None:
+    signal = generate_tone(120, duration_seconds=5, sample_rate_hz=8000)
 
-    peaks = dominant_frequencies(signal, sample_rate_hz=2000, count=3)
+    peaks = find_dominant_frequencies(signal, sample_rate_hz=8000, top_n=1)
 
-    assert peaks == pytest.approx([100, 200, 300])
+    assert peaks[0] == pytest.approx(120, abs=0.1)
 
 
-def test_compute_spectrum_returns_expected_amplitude() -> None:
+def test_find_dominant_frequencies_identifies_harmonics() -> None:
+    signal = generate_harmonic_signal(120, 3, 1, 2000)
+
+    peaks = find_dominant_frequencies(signal, sample_rate_hz=2000, top_n=3)
+
+    assert peaks == pytest.approx([120, 240, 360])
+
+
+def test_compute_fft_returns_expected_amplitude() -> None:
     signal = generate_tone(100, 1, 2000)
-    frequencies, amplitudes = compute_spectrum(signal, sample_rate_hz=2000)
+    frequencies, amplitudes = compute_fft(signal, sample_rate_hz=2000)
 
     tone_index = int((frequencies == 100).nonzero()[0][0])
     assert amplitudes[tone_index] == pytest.approx(1.0)
+
+
+def test_find_dominant_frequencies_rejects_invalid_top_n() -> None:
+    with pytest.raises(ValueError, match="positive integer"):
+        find_dominant_frequencies([0, 1], sample_rate_hz=8000, top_n=0)
