@@ -1,26 +1,34 @@
 """FastAPI entry point for the QuietEarth simulation."""
 
 from fastapi import FastAPI
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from src.acoustic_model import (
-    calculate_peak_level,
-    calculate_rms,
-    calculate_signal_energy,
     find_dominant_frequencies,
     generate_harmonic_signal,
-    tonal_reduction_db,
 )
 
 app = FastAPI(title="QuietEarth", version="0.1.0")
 
+SAMPLE_RATE_HZ = 8000
+
 
 class SimulationRequest(BaseModel):
-    fundamental_hz: float = Field(default=120, gt=0)
-    harmonic_count: int = Field(default=3, ge=1)
-    duration_seconds: float = Field(default=1, gt=0)
-    sample_rate_hz: int = Field(default=8000, gt=0)
-    control_enabled: bool = True
+    model_config = ConfigDict(extra="forbid")
+
+    fundamental_hz: float = Field(gt=0)
+    harmonics: int = Field(ge=1)
+
+    @model_validator(mode="after")
+    def validate_highest_harmonic(self) -> "SimulationRequest":
+        if self.fundamental_hz * self.harmonics >= SAMPLE_RATE_HZ / 2:
+            raise ValueError("highest harmonic must be below 4000 Hz")
+        return self
+
+
+class SimulationResponse(BaseModel):
+    dominant_frequencies: list[float]
+    simulation: bool
 
 
 @app.get("/health")
@@ -32,27 +40,19 @@ def health() -> dict[str, bool | str]:
     }
 
 
-@app.post("/simulate")
-def simulate(request: SimulationRequest) -> dict[str, object]:
+@app.post("/simulate", response_model=SimulationResponse)
+def simulate(request: SimulationRequest) -> SimulationResponse:
     source = generate_harmonic_signal(
         fundamental_hz=request.fundamental_hz,
-        harmonics=request.harmonic_count,
-        duration_seconds=request.duration_seconds,
-        sample_rate_hz=request.sample_rate_hz,
+        harmonics=request.harmonics,
+        sample_rate_hz=SAMPLE_RATE_HZ,
     )
-    residual = source * (0.1 if request.control_enabled else 1.0)
 
-    return {
-        "simulation": True,
-        "field_validated": False,
-        "control_enabled": request.control_enabled,
-        "dominant_frequencies_hz": find_dominant_frequencies(
+    return SimulationResponse(
+        dominant_frequencies=find_dominant_frequencies(
             source,
-            request.sample_rate_hz,
-            top_n=request.harmonic_count,
+            SAMPLE_RATE_HZ,
+            top_n=request.harmonics,
         ),
-        "peak_level": calculate_peak_level(source),
-        "rms": calculate_rms(source),
-        "signal_energy": calculate_signal_energy(source),
-        "tonal_reduction_db": tonal_reduction_db(source, residual),
-    }
+        simulation=True,
+    )

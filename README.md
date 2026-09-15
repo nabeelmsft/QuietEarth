@@ -233,19 +233,16 @@ No user interface or physical-control integration is included.
 ```json
 {
   "fundamental_hz": 120,
-  "harmonic_count": 3,
-  "duration_seconds": 5,
-  "sample_rate_hz": 8000,
-  "control_enabled": true
+  "harmonics": 3
 }
 ```
 
-All API responses must include:
+The simulation response identifies the dominant frequencies:
 
 ```json
 {
-  "simulation": true,
-  "field_validated": false
+  "dominant_frequencies": [120, 240, 360],
+  "simulation": true
 }
 ```
 
