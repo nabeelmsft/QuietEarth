@@ -21,6 +21,17 @@ def test_generate_tone_uses_default_sample_rate() -> None:
     assert signal.shape == (4000,)
 
 
+def test_generate_tone_supports_phase_offset() -> None:
+    signal = generate_tone(
+        1,
+        duration_seconds=0.25,
+        sample_rate_hz=4,
+        phase_degrees=90,
+    )
+
+    assert signal == pytest.approx([1])
+
+
 def test_generate_tone_rejects_frequency_at_nyquist() -> None:
     with pytest.raises(ValueError, match="Nyquist"):
         generate_tone(500, duration_seconds=1, sample_rate_hz=1000)

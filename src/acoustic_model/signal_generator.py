@@ -9,6 +9,7 @@ def generate_tone(
     duration_seconds: float,
     sample_rate_hz: int = 8000,
     amplitude: float = 1.0,
+    phase_degrees: float = 0.0,
 ) -> NDArray[np.float64]:
     """Generate a sine wave as a one-dimensional NumPy array."""
     if frequency_hz <= 0:
@@ -21,13 +22,16 @@ def generate_tone(
         raise ValueError("frequency_hz must be below the Nyquist frequency")
     if not np.isfinite(amplitude):
         raise ValueError("amplitude must be finite")
+    if not np.isfinite(phase_degrees):
+        raise ValueError("phase_degrees must be finite")
 
     sample_count = round(duration_seconds * sample_rate_hz)
     if sample_count < 1:
         raise ValueError("duration_seconds is too short for the sample rate")
 
     time = np.arange(sample_count, dtype=np.float64) / sample_rate_hz
-    return amplitude * np.sin(2 * np.pi * frequency_hz * time)
+    phase_radians = np.deg2rad(phase_degrees)
+    return amplitude * np.sin(2 * np.pi * frequency_hz * time + phase_radians)
 
 
 def generate_harmonic_signal(

@@ -246,6 +246,48 @@ The simulation response identifies the dominant frequencies:
 }
 ```
 
+## Ideal cancellation experiment
+
+Experiment 001 demonstrates idealized waveform superposition for a known pure
+tone:
+
+```bash
+python -m experiments.experiment_001_ideal_cancellation
+```
+
+The experiment generates a 120 Hz primary tone and an equal-amplitude control
+tone with a 180-degree phase offset. It reports RMS, energy, residual energy
+ratio, and reduction when the result is above the floating-point numerical
+floor.
+
+This deterministic simulation does not model propagation delay, speaker or
+microphone transfer functions, reflections, airflow, wind, actuator limits,
+changing acoustic paths, real-time latency, or physical Active Acoustic
+Aperture behavior. Mathematical waveform cancellation does not prove
+datacenter noise reduction.
+
+## Propagation delay experiment
+
+Experiment 002 isolates propagation delay and compares equal paths, mismatched
+paths without compensation, and the same mismatch with calculated phase
+compensation:
+
+```bash
+python -m experiments.experiment_002_propagation_delay
+```
+
+The model rounds travel time to the nearest whole sample, delays by zero
+padding, truncates samples shifted beyond the observation window, and never
+wraps delayed samples to the beginning. The speed of sound defaults to 343
+m/s but is configurable; 343 m/s is not treated as universally exact.
+
+This experiment only demonstrates that propagation delay changes the phase
+relationship between simulated primary and control signals. It excludes
+speaker and microphone characteristics, reflections, airflow, wind,
+atmospheric conditions, environmental geometry, processing and actuator
+latency, multiple sources, spatial cancellation, and physical Active Acoustic
+Aperture behavior. It does not prove physical or field attenuation.
+
 ## Research questions
 
 1. What tonal frequencies dominate objectionable cooling-fan noise?
