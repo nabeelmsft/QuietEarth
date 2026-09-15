@@ -4,6 +4,9 @@ from fastapi import FastAPI
 from pydantic import BaseModel, Field
 
 from src.acoustic_model import (
+    calculate_peak_level,
+    calculate_rms,
+    calculate_signal_energy,
     find_dominant_frequencies,
     generate_harmonic_signal,
     tonal_reduction_db,
@@ -48,5 +51,8 @@ def simulate(request: SimulationRequest) -> dict[str, object]:
             request.sample_rate_hz,
             top_n=request.harmonic_count,
         ),
+        "peak_level": calculate_peak_level(source),
+        "rms": calculate_rms(source),
+        "signal_energy": calculate_signal_energy(source),
         "tonal_reduction_db": tonal_reduction_db(source, residual),
     }
