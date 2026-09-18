@@ -1,0 +1,110 @@
+{
+  "metadata": {
+    "experiment": "Experiment 003: Phase-Coherent Physical Tonal Attenuation",
+    "target_frequency_hz": 200,
+    "measurement_source": "Experiment 003 recorded physical acoustic measurement",
+    "data_classification": "recorded_physical",
+    "hardware_summary": "Creative Inspire T2900 left/right loudspeakers on one synchronized stereo playback clock; Jabra USB microphone; Jetson Xavier acquisition and QuietEarth compute_fft() analysis.",
+    "measurement_location": "Fixed Jabra USB error microphone positioned approximately midway between the two Creative satellite loudspeakers.",
+    "experimental_limitations": [
+      "One fixed error-microphone location only.",
+      "Does not demonstrate whole-room or outdoor attenuation.",
+      "Does not validate an airflow-preserving aperture.",
+      "Does not validate cooling-fan or operational datacenter attenuation.",
+      "FFT amplitudes are not calibrated dB SPL measurements."
+    ],
+    "canonical_document": "docs/experiments/experiment-003-physical-tonal-attenuation.md"
+  },
+  "measurements": [
+    {
+      "target_frequency_hz": 200,
+      "condition": "left_speaker_only",
+      "control_phase_degrees": null,
+      "trial_identifier": "left-only-1",
+      "measured_amplitude": 58.652957,
+      "measurement_source": "Experiment 003 recorded physical acoustic measurement",
+      "data_classification": "recorded_physical"
+    },
+    {
+      "target_frequency_hz": 200,
+      "condition": "right_speaker_only",
+      "control_phase_degrees": null,
+      "trial_identifier": "right-only-1",
+      "measured_amplitude": 52.448952,
+      "measurement_source": "Experiment 003 recorded physical acoustic measurement",
+      "data_classification": "recorded_physical"
+    },
+    {
+      "target_frequency_hz": 200,
+      "condition": "both_channels",
+      "control_phase_degrees": 345,
+      "trial_identifier": "phase-345-1",
+      "measured_amplitude": 57.369749,
+      "measurement_source": "Experiment 003 recorded physical acoustic measurement",
+      "data_classification": "recorded_physical"
+    },
+    {
+      "target_frequency_hz": 200,
+      "condition": "both_channels",
+      "control_phase_degrees": 0,
+      "trial_identifier": "phase-0-1",
+      "measured_amplitude": 39.933457,
+      "measurement_source": "Experiment 003 recorded physical acoustic measurement",
+      "data_classification": "recorded_physical"
+    },
+    {
+      "target_frequency_hz": 200,
+      "condition": "both_channels",
+      "control_phase_degrees": 15,
+      "trial_identifier": "phase-15-1",
+      "measured_amplitude": 29.684351,
+      "measurement_source": "Experiment 003 recorded physical acoustic measurement",
+      "data_classification": "recorded_physical"
+    },
+    {
+      "target_frequency_hz": 200,
+      "condition": "both_channels",
+      "control_phase_degrees": 30,
+      "trial_identifier": "phase-30-1",
+      "measured_amplitude": 15.072868,
+      "measurement_source": "Experiment 003 recorded physical acoustic measurement",
+      "data_classification": "recorded_physical"
+    },
+    {
+      "target_frequency_hz": 200,
+      "condition": "both_channels",
+      "control_phase_degrees": 45,
+      "trial_identifier": "phase-45-1",
+      "measured_amplitude": 1.284177,
+      "measurement_source": "Experiment 003 recorded physical acoustic measurement",
+      "data_classification": "recorded_physical"
+    },
+    {
+      "target_frequency_hz": 200,
+      "condition": "both_channels",
+      "control_phase_degrees": 45,
+      "trial_identifier": "phase-45-2",
+      "measured_amplitude": 0.844939,
+      "measurement_source": "Experiment 003 recorded physical acoustic measurement",
+      "data_classification": "recorded_physical"
+    },
+    {
+      "target_frequency_hz": 200,
+      "condition": "both_channels",
+      "control_phase_degrees": 45,
+      "trial_identifier": "phase-45-3",
+      "measured_amplitude": 0.565633,
+      "measurement_source": "Experiment 003 recorded physical acoustic measurement",
+      "data_classification": "recorded_physical"
+    },
+    {
+      "target_frequency_hz": 200,
+      "condition": "both_channels",
+      "control_phase_degrees": 180,
+      "trial_identifier": "phase-180-1",
+      "measured_amplitude": 107.806039,
+      "measurement_source": "Experiment 003 recorded physical acoustic measurement",
+      "data_classification": "recorded_physical"
+    }
+  ]
+}
