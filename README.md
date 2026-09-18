@@ -10,7 +10,7 @@ QuietEarth is a Microsoft Hackathon 2026 research and proof-of-concept project e
 
 **Making AI infrastructure a better neighbor.**
 
-![QuietEarth vision: AI datacenter, open airflow, intelligent acoustic control, and community](docs\assets\hackathon\quietearth-hero.jpg)
+![QuietEarth vision: AI datacenter, open airflow, intelligent acoustic control, and community](docs/assets/hackathon/quietearth-hero.jpg)
 
 QuietEarth is a Microsoft Hackathon 2026 research proof of concept exploring whether edge intelligence and synchronized acoustic control can reduce persistent tonal noise escaping from AI datacenter cooling infrastructure while keeping the required cooling\-airflow path open.
 
@@ -24,7 +24,7 @@ The complete Active Acoustic Aperture remains a proposed engineering architectur
 
 **Real sound. Real loudspeakers. Real acoustic propagation. Real microphone acquisition. Real Jetson edge hardware. Repeatable physical measurements.**
 
-![Experiment 003 physical setup with two synchronized control sources and a fixed error microphone](docs\assets\hackathon\experiment-003-physical-setup.jpg)
+![Experiment 003 physical setup with two synchronized control sources and a fixed error microphone](docs/assets/hackathon/experiment-003-physical-setup.jpg)
 
 *Experiment 003 physical setup: two independently controlled acoustic sources driven from one synchronized playback clock, with a fixed Jabra error microphone.*
 
@@ -84,7 +84,7 @@ Only the relative control phase changed.
 
 **Three\-trial mean residual: 0.898250**
 
-![QuietEarth Experiment 003 terminal results](docs\assets\hackathon\experiment-003-results.jpg)
+![QuietEarth Experiment 003 terminal results](docs/assets/hackathon/experiment-003-results.jpg)
 
 These measurements demonstrate repeatable phase\-controlled attenuation of a physical 200 Hz acoustic tone at one fixed error\-microphone location under the tested physical geometry.
 
@@ -105,7 +105,7 @@ The software:
 - analyzed Experiment 003 microphone recordings; and
 - executed the Experiment 004 control\-state search.
 
-![QuietEarth running on Jetson Xavier with physical experiment results](docs\assets\hackathon\jetson-quietearth-results.jpg)
+![QuietEarth running on Jetson Xavier with physical experiment results](docs/assets/hackathon/jetson-quietearth-results.jpg)
 
 *QuietEarth running on Jetson Xavier with physical Experiment 003 measurements visible in the terminal.*
 
