@@ -1,11 +1,5 @@
 # QuietEarth
 
-**Making AI infrastructure a better neighbor.**
-
-QuietEarth is a Microsoft Hackathon 2026 research and proof-of-concept project exploring whether an **Active Acoustic Aperture** can suppress persistent tonal noise emitted through AI datacenter cooling outlets while preserving airflow, cooling performance, compute capacity, and datacenter reliability.
-
-# QuietEarth
-
 ## Active Acoustic Apertures for AI Datacenters
 
 **Making AI infrastructure a better neighbor.**
