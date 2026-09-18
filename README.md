@@ -4,6 +4,273 @@
 
 QuietEarth is a Microsoft Hackathon 2026 research and proof-of-concept project exploring whether an **Active Acoustic Aperture** can suppress persistent tonal noise emitted through AI datacenter cooling outlets while preserving airflow, cooling performance, compute capacity, and datacenter reliability.
 
+# QuietEarth
+
+## Active Acoustic Apertures for AI Datacenters
+
+**Making AI infrastructure a better neighbor.**
+
+![QuietEarth vision: AI datacenter, open airflow, intelligent acoustic control, and community](docs\assets\hackathon\quietearth-hero.jpg)
+
+QuietEarth is a Microsoft Hackathon 2026 research proof of concept exploring whether edge intelligence and synchronized acoustic control can reduce persistent tonal noise escaping from AI datacenter cooling infrastructure while keeping the required cooling\-airflow path open.
+
+**QuietEarth's goal is to eliminate perceptible datacenter hum at the source, without reducing compute capacity, compromising cooling, or asking surrounding communities to adapt.**
+
+The complete Active Acoustic Aperture remains a proposed engineering architecture. During the Hackathon, QuietEarth progressed beyond simulation and demonstrated the underlying physical acoustic\-control effect at one fixed error\-microphone location.
+
+---
+
+## What Is Real Today?
+
+**Real sound. Real loudspeakers. Real acoustic propagation. Real microphone acquisition. Real Jetson edge hardware. Repeatable physical measurements.**
+
+![Experiment 003 physical setup with two synchronized control sources and a fixed error microphone](docs\assets\hackathon\experiment-003-physical-setup.jpg)
+
+*Experiment 003 physical setup: two independently controlled acoustic sources driven from one synchronized playback clock, with a fixed Jabra error microphone.*
+
+The physical signal path was:
+
+Synchronized stereo control signal
+
+                ↓
+
+Creative LEFT and RIGHT loudspeakers
+
+                ↓
+
+Physical acoustic propagation through air
+
+                ↓
+
+Fixed Jabra error microphone
+
+                ↓
+
+Jetson Xavier
+
+                ↓
+
+QuietEarth compute\_fft()
+
+                ↓
+
+Measured residual 200 Hz amplitude
+
+---
+
+## Hackathon Breakthrough
+
+Experiment 003 tested whether synchronized control signals with different relative phases could alter a real 200 Hz acoustic field.
+
+The loudspeakers, microphone, geometry, playback level, acquisition settings, and QuietEarth analysis path were held fixed.
+
+Only the relative control phase changed.
+
+| Condition | Measured 200 Hz amplitude |
+| --- | --- |
+| LEFT speaker only | 58.652957 |
+| RIGHT speaker only | 52.448952 |
+| BOTH 0° | 39.933457 |
+| BOTH 15° | 29.684351 |
+| BOTH 30° | 15.072868 |
+| BOTH 45°, Trial 1 | 1.284177 |
+| BOTH 45°, Trial 2 | 0.844939 |
+| BOTH 45°, Trial 3 | 0.565633 |
+| BOTH 180° | 107.806039 |
+
+### Three Independent 45° Trials
+
+**1.284177 → 0.844939 → 0.565633**
+
+**Three\-trial mean residual: 0.898250**
+
+![QuietEarth Experiment 003 terminal results](docs\assets\hackathon\experiment-003-results.jpg)
+
+These measurements demonstrate repeatable phase\-controlled attenuation of a physical 200 Hz acoustic tone at one fixed error\-microphone location under the tested physical geometry.
+
+The values are relative experimental FFT amplitudes produced through the QuietEarth compute\_fft() measurement path. They are not calibrated dB SPL measurements.
+
+---
+
+## QuietEarth at the Edge
+
+QuietEarth was deployed to Jetson Xavier using an isolated Python 3.12 environment.
+
+The software:
+
+- generated and analyzed tonal signals;
+- modeled ideal cancellation;
+- modeled propagation\-delay effects;
+- detected physical 440 Hz and 200 Hz tones;
+- analyzed Experiment 003 microphone recordings; and
+- executed the Experiment 004 control\-state search.
+
+![QuietEarth running on Jetson Xavier with physical experiment results](docs\assets\hackathon\jetson-quietearth-results.jpg)
+
+*QuietEarth running on Jetson Xavier with physical Experiment 003 measurements visible in the terminal.*
+
+The final repository test suite completed successfully:
+
+**66 tests passed**
+
+---
+
+## From Measurement to Intelligence
+
+In Experiment 003, the control phase was changed manually.
+
+Experiment 004 converted that process into a provider\-independent controller that reasons over acoustic measurements.
+
+SEARCH
+
+   ↓
+
+VERIFY
+
+   ↓
+
+MAINTAIN
+
+   ↓
+
+REACQUIRE
+
+Using the recorded physical measurements from Experiment 003, QuietEarth:
+
+- selected the lowest\-residual tested control state;
+- independently verified the selected state using three measurements;
+- entered MAINTAIN after successful verification; and
+- requested REACQUIRE when a later residual exceeded the configured threshold.
+
+Experiment 004 selected **45°** for the tested physical geometry. That value is not hard\-coded and is not considered universally optimal.
+
+The required control state can change with acoustic propagation, transducer behavior, equipment, geometry, and environmental conditions.
+
+Experiment 004 operates over recorded physical measurements. Live autonomous microphone\-to\-actuator control remains a future validation stage.
+
+---
+
+## Proposed Active Acoustic Aperture
+
+QuietEarth proposes extending the single\-location physical control effect demonstrated in Experiment 003 to an acoustic escape path associated with datacenter cooling infrastructure.
+
+Datacenter Cooling Infrastructure
+
+                ↓
+
+Reference Acoustic Sensing
+
+                ↓
+
+QuietEarth Edge Controller
+
+                ↓
+
+Distributed Acoustic\-Control Elements
+
+┌─────────────────────────────────────┐
+
+│ Control Element     Control Element │
+
+│                                     │
+
+│          OPEN AIRFLOW PATH          │
+
+│                                     │
+
+│ Control Element     Control Element │
+
+└─────────────────────────────────────┘
+
+                ↓
+
+Error and Validation Microphones
+
+                ↓
+
+SEARCH → VERIFY → MAINTAIN → REACQUIRE
+
+                ↓
+
+Datacenter Boundary
+
+                ↓
+
+Surrounding Community
+
+The intended architecture keeps the airflow path physically open by design.
+
+Physical airflow preservation, static\-pressure behavior, thermal performance, live closed\-loop control, spatial attenuation, real cooling\-fan operation, outdoor propagation, and datacenter\-scale performance remain subsequent validation stages.
+
+---
+
+## Start Here
+
+### If You Have 30 Seconds
+
+Read the **Hackathon Breakthrough** section above.
+
+### If You Have 3 Minutes
+
+Read the [Hackathon Evidence and Results Summary](https://cr.m365copilotapp.svc.cloud.microsoft/hwav2/chat/conversation/docs/hackathon-evidence-and-results.md).
+
+### If You Want the Physical Evidence
+
+Read [Experiment 003: Physical Tonal Attenuation](https://cr.m365copilotapp.svc.cloud.microsoft/hwav2/chat/conversation/docs/experiments/experiment-003-physical-tonal-attenuation.md).
+
+### If You Want the Controller
+
+Review and run Experiment 004:
+
+experiments/experiment\_004\_controller\_phase\_search.py
+
+### If You Want the Datacenter Architecture
+
+Read the [Active Acoustic Aperture Architecture](https://cr.m365copilotapp.svc.cloud.microsoft/hwav2/chat/conversation/docs/active-acoustic-aperture-architecture.md).
+
+### If You Want to Validate the Software
+
+Follow the setup instructions below and run:
+
+pytest
+
+---
+
+## Evidence Status
+
+### Demonstrated
+
+- Numerical tonal cancellation
+- Propagation\-aware control modeling
+- Jetson Xavier edge execution
+- Physical microphone acquisition
+- Physical 440 Hz and 200 Hz detection
+- Synchronized physical acoustic control
+- Phase\-dependent physical attenuation and reinforcement
+- Three repeatable low\-residual 45° measurements
+- Measurement\-driven controller search and verification
+- MAINTAIN and REACQUIRE controller reasoning
+
+### Proposed and Next to Validate
+
+- Live microphone\-to\-actuator control
+- Automatic live phase, amplitude, and delay optimization
+- Physical Active Acoustic Aperture
+- Real fixed\-speed cooling equipment
+- Multiple error microphones
+- Extended spatial attenuation
+- Airflow, static\-pressure, and thermal performance
+- Outdoor propagation
+- Datacenter pilot
+- Property\-boundary attenuation
+- Resident\-centered field outcomes
+
+---
+
+## Vision
+
+**AI datacenters should deliver valuable compute without asking neighboring communities to sacrifice peace and quiet.**
+
 ## The problem
 
 Communities near large AI datacenters may experience persistent tonal humming or droning from continuously operating cooling infrastructure. Even when the overall sound level is relatively low, a stable and identifiable tone can remain noticeable, especially during quiet nighttime conditions.
