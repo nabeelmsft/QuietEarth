@@ -298,7 +298,7 @@ Experiment 003 therefore does not establish:
 
 # 8\. Experiment 004: Autonomous Tonal Control\-State Search
 
-Experiment 003 demonstrated that a low\-residual physical acoustic state could exist.
+Experiment 003 demonstrated that a low\-residual physical acoustic state can exist at one fixed error\-microphone location under the tested physical geometry.
 
 Experiment 004 asked the next engineering question:
 
@@ -377,7 +377,7 @@ The controller does not yet perform live microphone\-to\-speaker closed\-loop ph
 
 # 9\. The Active Acoustic Aperture Architecture
 
-QuietEarth proposes moving the validated control mechanism to the acoustic escape path of cooling infrastructure.
+QuietEarth proposes extending the single\-location physical control effect demonstrated in Experiment 003 to the acoustic escape path of cooling infrastructure.
 
 Conceptually:
 

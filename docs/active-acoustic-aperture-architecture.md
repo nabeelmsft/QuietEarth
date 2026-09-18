@@ -345,7 +345,7 @@ Experiment 004:
 | Active Acoustic Aperture validated | `FALSE` |
 | Datacenter field validated | `FALSE` |
 
-The reported decibel value is an amplitude-ratio calculation. It is not calibrated dB SPL.
+The reported decibel value is an amplitude-ratio calculation derived from uncalibrated experimental FFT amplitudes. It is not a calibrated dB SPL measurement.
 
 ### 7.3 Measurement-Provider Architecture
 
@@ -727,7 +727,7 @@ Final validation should determine whether:
 
 > QuietEarth is not designed to block cooling airflow. It is designed to control persistent tonal acoustic energy at the point where that energy escapes the cooling system, using edge intelligence, synchronized acoustic control, and measured feedback.
 
-> Experiment 003 established that a controllable low-residual physical acoustic state can exist. Experiment 004 established that QuietEarth can search for, verify, maintain, and reacquire such a state from measurement data. The Active Acoustic Aperture is the proposed architecture for extending those capabilities to AI datacenter cooling infrastructure.
+> Experiment 003 established that a controllable low-residual physical acoustic state can exist at one fixed error-microphone location under the tested physical geometry. Experiment 004 established that QuietEarth can search for, verify, maintain, and reacquire a low-residual tested state using recorded physical measurement data. The Active Acoustic Aperture is the proposed architecture for extending those capabilities to AI datacenter cooling infrastructure.
 
 The final vision remains:
 

@@ -46,6 +46,8 @@ The JBL speaker was not used during this experiment.
 | Both, 45°, Trial 3 | 0.565633 |
 | Both, 180° | 107.806039 |
 
+The reported amplitudes are relative experimental FFT amplitudes produced by the QuietEarth `compute_fft()` measurement path. They are suitable for controlled comparison within this experiment and are not calibrated dB SPL measurements.
+
 ## Repeatability
 
 Three independent recordings were performed at the 45° control setting.
@@ -113,7 +115,7 @@ These are subsequent engineering and validation stages.
 
 ## QuietEarth Significance
 
-Experiment 003 validates the core physical control mechanism required by QuietEarth.
+Experiment 003 validates that synchronized phase control can produce repeatable attenuation at one fixed error-microphone location under the tested physical geometry.
 
 The next engineering milestone is to replace manual phase selection with a closed-loop controller that automatically measures residual tonal energy and continuously adjusts control phase, amplitude, and delay to minimize it.
 
